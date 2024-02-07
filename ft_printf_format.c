@@ -6,7 +6,7 @@
 /*   By: elefonta <elefonta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 10:27:56 by elefonta          #+#    #+#             */
-/*   Updated: 2024/01/11 10:32:21 by elefonta         ###   ########.fr       */
+/*   Updated: 2024/02/07 12:16:48 by elefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,59 @@ int	ft_print_str(char *s)
 	return (i);
 }
 
-int	
+int	ft_print_unsigned(unsigned int nb)
+{
+	int	count;
+
+	count = 0;
+	if (nb < 10)
+	{
+		count += ft_print_char(nb + '0');
+	}
+	else
+	{
+		count += ft_print_unsigned(nb / 10);
+		count += ft_print_unsigned(nb % 10);
+	}
+	return (count);
+}
+
+int	ft_print_nbr(int nb)
+{
+	int	count;
+
+	count = 0;
+	if (nb < 0)
+	{
+		count += ft_print_char('-');
+		nb *= -1;
+	}
+	return (count + ft_print_unsigned(nb));
+}
+
+int	ft_print_nbr_base(unsigned long long nb, char *base, const char *format)
+{
+	int		count;
+	size_t	base_length;
+
+	count = 0;
+	if (*format == 'p' && *(format + 1) == '\0')
+	{
+		if (nb)
+		{
+			count += ft_print_str("0x");
+			format = "x";
+		}
+		else
+			return (ft_print_str("(nil)"));
+	}
+	base_length = ft_strlen(base);
+	if (nb < base_length)
+		count += ft_print_char(base[nb % base_length]);
+	else
+	{
+		count += ft_print_nbr_base(nb / base_length, base, format);
+		count += ft_print_nbr_base(nb % base_length, base, format);
+	}
+	return (count);
+}

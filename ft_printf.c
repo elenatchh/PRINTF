@@ -6,13 +6,10 @@
 /*   By: elefonta <elefonta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 11:54:03 by elefonta          #+#    #+#             */
-/*   Updated: 2024/01/13 17:12:08 by elefonta         ###   ########.fr       */
+/*   Updated: 2024/02/07 11:59:09 by elefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
-#include <stdarg.h>
 #include "ft_printf.h"
 
 int	ft_printf(const char *format, ...)
@@ -29,7 +26,7 @@ int	ft_printf(const char *format, ...)
 		if (format[i] == '%')
 		{
 			i++;
-			count += ft_print_args(format[i], arguments);
+			count += ft_print_args(format[i], arguments, format);
 		}
 		else
 			count++;
@@ -39,10 +36,10 @@ int	ft_printf(const char *format, ...)
 	return (count);
 }
 
-int	ft_print_args(char type, va_list argument)
+int	ft_print_args(char type, va_list argument, const char *format)
 {
 	if (type == 'c')
-		return (ft_print_char(va_arg(argument, char)));
+		return (ft_print_char(va_arg(argument, int)));
 	if (type == 's')
 		return (ft_print_str(va_arg(argument, char *)));
 	if (type == 'd' || type == 'i')
@@ -52,7 +49,7 @@ int	ft_print_args(char type, va_list argument)
 	if (type == 'u')
 		return (ft_print_unsigned(va_arg(argument, unsigned int)));
 	if (type == 'x')
-		return (ft_print_nbr_base(va_arg(argument, unsigned int), 
+		return (ft_print_nbr_base(va_arg(argument, unsigned int),
 				LOWER_HEX, format));
 	if (type == 'X')
 		return (ft_print_nbr_base(va_arg(argument, unsigned int),

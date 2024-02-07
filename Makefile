@@ -6,7 +6,41 @@
 #    By: elefonta <elefonta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/11 10:37:46 by elefonta          #+#    #+#              #
-#    Updated: 2024/01/11 10:37:47 by elefonta         ###   ########.fr        #
+#    Updated: 2024/02/07 12:06:23 by elefonta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+NAME = libftprintf.a
+
+CC = cc
+CFLAGS = -Wall -Wextra -Werror
+
+PRINTF_H = ft_printf.h
+
+SRCS = ft_printf.c ft_printf_format.c ft_strlen.c
+
+OBJECTS = $(SRCS:%.c=%.o)
+
+.PHONY: all
+all: $(NAME)
+
+$(NAME): $(OBJECTS)
+	@echo Building printf
+	
+
+%.o: %.c $(PRINTF_H)
+	@echo Compiling $<
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+.PHONY: clean
+clean:
+	@echo Cleaning up object files
+	@rm -f $(OBJECTS)
+
+.PHONY: fclean
+fclean: clean
+	@echo Cleaning up printf
+	@rm -f $(NAME)
+
+.PHONY: re
+re: fclean all
