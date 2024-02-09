@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elefonta <elefonta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: melondeau <melondeau@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 11:54:03 by elefonta          #+#    #+#             */
-/*   Updated: 2024/02/07 11:59:09 by elefonta         ###   ########.fr       */
+/*   Updated: 2024/02/09 11:34:33 by melondeau        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,13 @@ int	ft_printf(const char *format, ...)
 		{
 			i++;
 			count += ft_print_args(format[i], arguments, format);
+			i++;
 		}
 		else
-			count++;
-		i++;
+		{
+  			write(1, &format[i], 1);
+			i++;
+		}
 	}
 	va_end(arguments);
 	return (count);
@@ -59,3 +62,52 @@ int	ft_print_args(char type, va_list argument, const char *format)
 				LOWER_HEX, format));
 	return (0);
 }
+#include <stdio.h>
+
+int main() {
+    char nom[] = "John";  
+    int nombre = 42;
+    int nbr = -12;
+    unsigned int test = 125; 
+    unsigned int testx = 125;
+    unsigned int testxe = 125;
+
+    printf("Bonjour %s, il y a %i points\nTu veux %d bananes?\nHehe %% LOL \nOn tente %u,\nMaintenant, on va voir les x : %x voilà \nMaintenant, on voit les X : %X\n", nom, nombre, nbr, test, testx, testxe);
+	ft_printf("il y a %i points\n, bonjour %s",  nombre, nom);
+    return 0;
+}
+
+
+// int main (void)
+// {
+// 	char c = 'c';
+// 	printf("%d", printf("abc%"));	
+// 	printf("\n");
+// 	printf("%d", ft_printf("abc%"));
+// }
+
+
+
+// int main()
+// {
+
+// 	ft_printf("%d", -123456677);
+// 	printf("\n");
+// 	printf("%d", -123456677 );
+// 	ft_printf("%d", -1234566733333337);
+// 	printf("\n");
+// 	ft_printf("%d", 123456677);
+// 	printf("\n");
+// 	ft_printf("%d", 111111113456111677);
+// 	printf("\n");
+// 	ft_printf("%s", "1222121213456677");
+// 	printf("\n");
+// 	ft_printf("%s%s%d", "-1222121213456677 ", "salut les zgueg ", 444);
+// 	printf("\n");
+// 	ft_printf("%x",5555);
+// 	printf("\n");
+// 	ft_printf("%p", 100000000);
+// 	printf("\n");
+	
+
+// }
