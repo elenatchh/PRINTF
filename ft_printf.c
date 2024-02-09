@@ -6,7 +6,7 @@
 /*   By: melondeau <melondeau@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 11:54:03 by elefonta          #+#    #+#             */
-/*   Updated: 2024/02/09 11:34:33 by melondeau        ###   ########.fr       */
+/*   Updated: 2024/02/09 14:11:39 by melondeau        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,26 @@
 
 int	ft_printf(const char *format, ...)
 {
-	int		i;
 	va_list	arguments;
 	int		count;
 
 	count = 0;
-	i = 0;
+	if (!format)
+		return(0);
 	va_start(arguments, format);
-	while (format[i])
+	while (*format)
 	{
-		if (format[i] == '%')
+		if (*format == '%')
 		{
-			i++;
-			count += ft_print_args(format[i], arguments, format);
-			i++;
+			format++;
+			count += ft_print_args(*format, arguments, format);
+			format++;
 		}
 		else
 		{
-  			write(1, &format[i], 1);
-			i++;
+  			count += ft_print_char(*format);
 		}
+		format++;
 	}
 	va_end(arguments);
 	return (count);
@@ -73,7 +73,7 @@ int main() {
     unsigned int testxe = 125;
 
     printf("Bonjour %s, il y a %i points\nTu veux %d bananes?\nHehe %% LOL \nOn tente %u,\nMaintenant, on va voir les x : %x voilà \nMaintenant, on voit les X : %X\n", nom, nombre, nbr, test, testx, testxe);
-	ft_printf("il y a %i points\n, bonjour %s",  nombre, nom);
+	ft_printf("bonjour %s \n,il y a %i points\n",nom, nombre);
     return 0;
 }
 
