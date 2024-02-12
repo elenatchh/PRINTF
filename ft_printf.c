@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melondeau <melondeau@student.42.fr>        +#+  +:+       +#+        */
+/*   By: elefonta <elefonta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 11:54:03 by elefonta          #+#    #+#             */
-/*   Updated: 2024/02/09 14:11:39 by melondeau        ###   ########.fr       */
+/*   Updated: 2024/02/12 15:09:06 by elefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,26 @@
 
 int	ft_printf(const char *format, ...)
 {
+	int		i;
 	va_list	arguments;
 	int		count;
 
 	count = 0;
-	if (!format)
-		return(0);
+	i = 0;
 	va_start(arguments, format);
-	while (*format)
+	while (format[i])
 	{
-		if (*format == '%')
+		if (format[i] == '%')
 		{
-			format++;
-			count += ft_print_args(*format, arguments, format);
-			format++;
+			i++;
+			count += ft_print_args(format[i], arguments, format);
+			i++;
 		}
 		else
 		{
-  			count += ft_print_char(*format);
+			count += ft_print_char(format[i]);
+			i++;
 		}
-		format++;
 	}
 	va_end(arguments);
 	return (count);
@@ -53,13 +53,13 @@ int	ft_print_args(char type, va_list argument, const char *format)
 		return (ft_print_unsigned(va_arg(argument, unsigned int)));
 	if (type == 'x')
 		return (ft_print_nbr_base(va_arg(argument, unsigned int),
-				LOWER_HEX, format));
+				LOWER_HEX, format, type));
 	if (type == 'X')
 		return (ft_print_nbr_base(va_arg(argument, unsigned int),
-				UPPER_HEX, format));
+				UPPER_HEX, format, type));
 	if (type == 'p')
 		return (ft_print_nbr_base((unsigned long long)va_arg(argument, void *),
-				LOWER_HEX, format));
+				LOWER_HEX, format, type));
 	return (0);
 }
 #include <stdio.h>
@@ -72,42 +72,7 @@ int main() {
     unsigned int testx = 125;
     unsigned int testxe = 125;
 
-    printf("Bonjour %s, il y a %i points\nTu veux %d bananes?\nHehe %% LOL \nOn tente %u,\nMaintenant, on va voir les x : %x voilà \nMaintenant, on voit les X : %X\n", nom, nombre, nbr, test, testx, testxe);
-	ft_printf("bonjour %s \n,il y a %i points\n",nom, nombre);
+    printf("Bonjour %s, il y a %i points\nTu veux %d bananes?\nHehe %% LOL \nOn tente %u,\nMaintenant, on va voir les x : %x voilà \nMaintenant, on voit les X : %X\n voici les p %p", nom, nombre, nbr, test, testx, testxe, NULL);
+	ft_printf("Bonjour %s, il y a %i points\nTu veux %d bananes?\nHehe %% LOL \nOn tente %u,\nMaintenant, on va voir les x : %x voilà \nMaintenant, on voit les X : %X\n voici les p %p", nom, nombre, nbr, test, testx, testxe, NULL);
     return 0;
 }
-
-
-// int main (void)
-// {
-// 	char c = 'c';
-// 	printf("%d", printf("abc%"));	
-// 	printf("\n");
-// 	printf("%d", ft_printf("abc%"));
-// }
-
-
-
-// int main()
-// {
-
-// 	ft_printf("%d", -123456677);
-// 	printf("\n");
-// 	printf("%d", -123456677 );
-// 	ft_printf("%d", -1234566733333337);
-// 	printf("\n");
-// 	ft_printf("%d", 123456677);
-// 	printf("\n");
-// 	ft_printf("%d", 111111113456111677);
-// 	printf("\n");
-// 	ft_printf("%s", "1222121213456677");
-// 	printf("\n");
-// 	ft_printf("%s%s%d", "-1222121213456677 ", "salut les zgueg ", 444);
-// 	printf("\n");
-// 	ft_printf("%x",5555);
-// 	printf("\n");
-// 	ft_printf("%p", 100000000);
-// 	printf("\n");
-	
-
-// }
