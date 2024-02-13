@@ -6,7 +6,7 @@
 /*   By: elefonta <elefonta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 10:27:56 by elefonta          #+#    #+#             */
-/*   Updated: 2024/02/12 15:03:43 by elefonta         ###   ########.fr       */
+/*   Updated: 2024/02/13 11:42:45 by elefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,7 @@ int	ft_print_nbr(int nb)
 	return (count + ft_print_unsigned(nb));
 }
 
-int	ft_print_nbr_base(unsigned long long nb, char *base,
-	const char *format, char type)
+int	ft_print_nbr_base(unsigned long long nb, char *base, char type)
 {
 	int		count;
 	size_t	base_length;
@@ -85,8 +84,8 @@ int	ft_print_nbr_base(unsigned long long nb, char *base,
 		count += ft_print_char(base[nb % base_length]);
 	else
 	{
-		count += ft_print_nbr_base(nb / base_length, base, format, type);
-		count += ft_print_nbr_base(nb % base_length, base, format, type);
+		count += ft_print_nbr_base(nb / base_length, base, type);
+		count += ft_print_nbr_base(nb % base_length, base, type);
 	}
 	return (count);
 }

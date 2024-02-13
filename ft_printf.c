@@ -6,7 +6,7 @@
 /*   By: elefonta <elefonta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 11:54:03 by elefonta          #+#    #+#             */
-/*   Updated: 2024/02/12 15:09:06 by elefonta         ###   ########.fr       */
+/*   Updated: 2024/02/13 13:58:40 by elefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,9 @@ int	ft_printf(const char *format, ...)
 		if (format[i] == '%')
 		{
 			i++;
-			count += ft_print_args(format[i], arguments, format);
+			if (ft_strchr(AUTH_ARGS, format[i]) == NULL)
+				continue ;
+			count += ft_print_args(format[i], arguments);
 			i++;
 		}
 		else
@@ -39,7 +41,7 @@ int	ft_printf(const char *format, ...)
 	return (count);
 }
 
-int	ft_print_args(char type, va_list argument, const char *format)
+int	ft_print_args(char type, va_list argument)
 {
 	if (type == 'c')
 		return (ft_print_char(va_arg(argument, int)));
@@ -53,13 +55,13 @@ int	ft_print_args(char type, va_list argument, const char *format)
 		return (ft_print_unsigned(va_arg(argument, unsigned int)));
 	if (type == 'x')
 		return (ft_print_nbr_base(va_arg(argument, unsigned int),
-				LOWER_HEX, format, type));
+				LOWER_HEX, type));
 	if (type == 'X')
 		return (ft_print_nbr_base(va_arg(argument, unsigned int),
-				UPPER_HEX, format, type));
+				UPPER_HEX, type));
 	if (type == 'p')
 		return (ft_print_nbr_base((unsigned long long)va_arg(argument, void *),
-				LOWER_HEX, format, type));
+				LOWER_HEX, type));
 	return (0);
 }
 #include <stdio.h>
@@ -72,7 +74,7 @@ int main() {
     unsigned int testx = 125;
     unsigned int testxe = 125;
 
-    printf("Bonjour %s, il y a %i points\nTu veux %d bananes?\nHehe %% LOL \nOn tente %u,\nMaintenant, on va voir les x : %x voilà \nMaintenant, on voit les X : %X\n voici les p %p", nom, nombre, nbr, test, testx, testxe, NULL);
-	ft_printf("Bonjour %s, il y a %i points\nTu veux %d bananes?\nHehe %% LOL \nOn tente %u,\nMaintenant, on va voir les x : %x voilà \nMaintenant, on voit les X : %X\n voici les p %p", nom, nombre, nbr, test, testx, testxe, NULL);
+    printf("%% Bonjour %s, il y a %i points\nTu veux %d bananes?\nHehe %% LOL \nOn tente %u,\nMaintenant, on va voir les x : %x voilà \nMaintenant, on voit les X : %X\n voici les p %p", nom, nombre, nbr, test, testx, testxe, NULL);
+	ft_printf("%% % Bonjour %s, il y a %i points\nTu veux %d bananes?\nHehe %% LOL \nOn tente %u,\nMaintenant, on va voir les x : %x voilà \nMaintenant, on voit les X : %X\n voici les p %p", nom, nombre, nbr, test, testx, testxe, NULL);
     return 0;
 }
