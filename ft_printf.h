@@ -6,7 +6,7 @@
 /*   By: elefonta <elefonta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 09:51:07 by elefonta          #+#    #+#             */
-/*   Updated: 2024/02/13 13:56:50 by elefonta         ###   ########.fr       */
+/*   Updated: 2024/02/15 10:37:25 by elefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,20 @@
 # include <stdarg.h>
 # include <stddef.h>
 # include <unistd.h>
-# include <stdio.h>
 
 # define LOWER_HEX "0123456789abcdef"
 # define UPPER_HEX "0123456789ABCDEF"
 # define AUTH_ARGS "cspdiuxX%"
 
-int	ft_printf(const char *format, ...);
-int	ft_print_args(char type, va_list argument);
+int			ft_printf(const char *format, ...);
+int			ft_print_args(char type, va_list argument);
 
-int	ft_print_char(char c);
-int	ft_print_str(char *s);
-int	ft_print_unsigned(unsigned int nb);
-int	ft_print_nbr(int nb);
-int	ft_print_nbr_base(unsigned long long nb, char *base, char type);
-int	ft_strlen(const char *str);
-char	*ft_strchr(const char *s, int c);
+int			ft_print_char(char c);
+int			ft_print_str(char *s);
+int			ft_print_unsigned(unsigned int nb);
+int			ft_print_nbr(int nb);
+int			ft_print_nbr_base(unsigned long long nb, char *base, char type);
+int			ft_strlen(const char *str);
+const char	*ft_strchr(const char *s, int c);
 
 #endif

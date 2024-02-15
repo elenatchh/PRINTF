@@ -6,7 +6,7 @@
 /*   By: elefonta <elefonta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 11:54:03 by elefonta          #+#    #+#             */
-/*   Updated: 2024/02/13 13:58:40 by elefonta         ###   ########.fr       */
+/*   Updated: 2024/02/15 11:10:05 by elefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,18 +63,4 @@ int	ft_print_args(char type, va_list argument)
 		return (ft_print_nbr_base((unsigned long long)va_arg(argument, void *),
 				LOWER_HEX, type));
 	return (0);
-}
-#include <stdio.h>
-
-int main() {
-    char nom[] = "John";  
-    int nombre = 42;
-    int nbr = -12;
-    unsigned int test = 125; 
-    unsigned int testx = 125;
-    unsigned int testxe = 125;
-
-    printf("%% Bonjour %s, il y a %i points\nTu veux %d bananes?\nHehe %% LOL \nOn tente %u,\nMaintenant, on va voir les x : %x voilà \nMaintenant, on voit les X : %X\n voici les p %p", nom, nombre, nbr, test, testx, testxe, NULL);
-	ft_printf("%% % Bonjour %s, il y a %i points\nTu veux %d bananes?\nHehe %% LOL \nOn tente %u,\nMaintenant, on va voir les x : %x voilà \nMaintenant, on voit les X : %X\n voici les p %p", nom, nombre, nbr, test, testx, testxe, NULL);
-    return 0;
 }

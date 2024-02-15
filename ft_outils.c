@@ -6,7 +6,7 @@
 /*   By: elefonta <elefonta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 11:17:22 by elefonta          #+#    #+#             */
-/*   Updated: 2024/02/13 13:57:53 by elefonta         ###   ########.fr       */
+/*   Updated: 2024/02/15 10:27:06 by elefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,24 +25,15 @@ int	ft_strlen(const char *str)
 	}
 	return (i);
 }
-char	*ft_strchr(const char *s, int c)
-{
-	size_t			i;
-	unsigned char	*str;
 
-	str = (unsigned char *) s;
-	i = 0;
-	while (s[i])
+const char	*ft_strchr(const char *s, int c)
+{
+	while (*s)
 	{
-		if (s[i] == (unsigned char)c)
-		{
-			return ((char *)s + i);
-		}
-		i++;
+		if (*s == (unsigned char)c)
+			return (s);
 	}
-	if (s[i] == (unsigned char)c)
-	{
-		return ((char *)s + i);
-	}
+	if (*s == (unsigned char)c)
+		return (s);
 	return (NULL);
 }
